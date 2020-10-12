@@ -21,7 +21,8 @@ namespace NeuroSonic.Charting.KShootMania
         {
             string fileName = Path.Combine(ParentDirectory, chartInfo.Set.FilePath, chartInfo.FileName);
 
-            var ksh = KshChart.CreateFromFile(fileName);
+            var ksh = KshChart.CreateFromFile(fileName, out string shaSum);
+            chartInfo.SourceFileHash = shaSum;
             var chart = ksh.ToVoltex(chartInfo);
 
             return chart;

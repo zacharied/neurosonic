@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-
+using System.Text;
+using SHA3.Net;
 using theori.Audio.Effects;
 using theori.Charting.Effects;
 
@@ -308,8 +309,15 @@ namespace NeuroSonic.Charting.KShootMania
     {
         internal const string SEP = "--";
 
-        public static KshChart CreateFromFile(string fileName)
+        public static KshChart CreateFromFile(string fileName, out string sha3512sum)
         {
+            using var binaryReader = File.OpenRead(fileName);
+            using (var sha = Sha3.Sha3512())
+            {
+                // Consume file into hash algorithm.
+                sha3512sum = BitConverter.ToString(sha.ComputeHash(binaryReader)).Replace("-", string.Empty);
+                Logger.Log($"Sum: {sha3512sum}");
+            }
             using var reader = File.OpenText(fileName);
             return Create(fileName, reader);
         }
