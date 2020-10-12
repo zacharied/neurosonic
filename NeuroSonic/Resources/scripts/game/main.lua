@@ -93,8 +93,6 @@ local function renderScoreSpriteNum(x, y, w, r, g, b, a)
 	end
 end
 
--- Landscape Layout
-
 local function renderJacketPanel(x, y, w)
 	local h = w * 0.5;
 
@@ -125,7 +123,7 @@ local function renderJacketPanel(x, y, w)
 	else
 		theori.graphics.setFillToColor(0, 0, 0, 200);
 	end
-	theori.graphics.fillRoundedRectVarying(x + margin, x + margin, jacketSize, jacketSize,
+	theori.graphics.fillRoundedRectVarying(x + margin, y + margin, jacketSize, jacketSize,
 										   0, rounding, 0, 0);
 
 	-- diff frame
@@ -252,6 +250,8 @@ local function renderGauge(x, y, h)
 	theori.graphics.fillString(tostring(math.floor(scoring.gauge * 100 + 0.5)), rateX + rateW * 0.65, rateY + rateH * 0.425);
 end
 
+-- Landscape Layout
+
 function Layouts.Landscape.Render(self)
     local w, h = LayoutWidth, LayoutHeight;
 	
@@ -263,12 +263,19 @@ end
 -- Wide Landscape Layout
 
 function Layouts.WideLandscape.Render(self)
-    Layouts.Landscape:Render();
+	Layouts.Landscape:Render();
 end
 
 -- Portrait Layout
 
 function Layouts.Portrait.Render(self)
+    local w, h = LayoutWidth, LayoutHeight;
+	
+	local elementLineY = h * 0.18
+
+	renderJacketPanel(w * 0.05, elementLineY, w * 0.3);
+	renderScorePanel(w * 0.65, elementLineY, w * 0.31);
+	renderGauge(w * 0.89, h * 0.448, h * 0.3);
 end
 
 
