@@ -33,7 +33,7 @@ namespace NeuroSonic.GamePlay
             public int GlowState;
         }
 
-        private const float LENGTH_BASE = 11;
+        private const float LENGTH_BASE = 7;
         private const float LENGTH_ADD = 1.1f;
 
         private float m_pitch, m_zoom; // "top", "bottom"
@@ -344,7 +344,7 @@ namespace NeuroSonic.GamePlay
             Transform GetAtRoll(float roll, float xOffset)
             {
                 const float ANCHOR_ROT = 2.5f;
-                const float ANCHOR_Y = -0.7925f;
+                const float ANCHOR_Y = -0.925f;
                 const float CONTNR_Z = -0.51f;
 
                 var origin = Transform.RotationZ(roll);
