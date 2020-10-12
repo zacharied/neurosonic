@@ -33,7 +33,7 @@ namespace NeuroSonic.GamePlay
             public int GlowState;
         }
 
-        private const float LENGTH_BASE = 8;
+        private const float LENGTH_BASE = 11;
         private const float LENGTH_ADD = 1.1f;
 
         private float m_pitch, m_zoom; // "top", "bottom"
