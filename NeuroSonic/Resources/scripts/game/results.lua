@@ -88,6 +88,8 @@ end
 
 function Layouts.Portrait.Render(self)
     Layout.DrawBackgroundFilled(self.Background);
+
+	renderResultsPanel(LayoutWidth * 0.1, LayoutWidth * 0.1, LayoutWidth * 0.8, LayoutHeight * 0.8);
 end
 
 
