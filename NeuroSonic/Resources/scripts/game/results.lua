@@ -51,12 +51,35 @@ function theori.layer.render()
     Layout.Render();
 end
 
+local function renderSongInfoPanel(x, y, w)
+	local jacketSize = w * 0.3;
+	local padding = 10;
+	local h = jacketSize + padding * 2;
+
+    theori.graphics.setFillToColor(0, 0, 0, 180);
+    theori.graphics.fillRect(x, y, w, h);
+
+	theori.graphics.setFillToTexture(chart.getJacketTexture(), 255, 255, 255, 255);
+	theori.graphics.fillRect(x +  padding, y + padding, jacketSize, jacketSize);
+
+    theori.graphics.setFont(nil);
+    theori.graphics.setFontSize(h * 0.1);
+    theori.graphics.setTextAlign(Anchor.TopLeft);
+    theori.graphics.setFillToColor(255, 255, 255, 255);
+
+	local textX = x + padding * 2 + jacketSize
+
+	theori.graphics.fillString(chart.songTitle, textX, y + padding)
+	theori.graphics.fillString(chart.songArtist, textX, y + padding + h * 0.1)
+	theori.graphics.fillString(string.format("%s %.0f by %s", chart.difficultyName, chart.difficultyLevel, chart.charter), textX, y + padding + h * 0.2)
+end
+
 local function renderResultsPanel(x, y, w, h)
     theori.graphics.setFillToColor(0, 0, 0, 180);
     theori.graphics.fillRect(x, y, w, h);
 
     theori.graphics.setFont(nil);
-    theori.graphics.setFontSize(h * 0.1);
+    theori.graphics.setFontSize(h * 0.05);
     theori.graphics.setTextAlign(Anchor.TopLeft);
     theori.graphics.setFillToColor(255, 255, 255, 255);
     
@@ -75,7 +98,8 @@ end
 function Layouts.Landscape.Render(self)
     Layout.DrawBackgroundFilled(self.Background);
 
-    renderResultsPanel(LayoutHeight * 0.1, LayoutHeight * 0.1, LayoutWidth * 0.4, LayoutHeight * 0.8);
+	renderSongInfoPanel(LayoutHeight * 0.1, LayoutHeight * 0.1, LayoutWidth * 0.35)
+    renderResultsPanel(LayoutWidth * 0.5, LayoutHeight * 0.1, LayoutWidth * 0.4, LayoutHeight * 0.8);
 end
 
 -- Wide Landscape Layout
@@ -89,7 +113,8 @@ end
 function Layouts.Portrait.Render(self)
     Layout.DrawBackgroundFilled(self.Background);
 
-	renderResultsPanel(LayoutWidth * 0.1, LayoutWidth * 0.1, LayoutWidth * 0.8, LayoutHeight * 0.8);
+	renderSongInfoPanel(LayoutWidth * 0.1, LayoutWidth * 0.1, LayoutWidth * 0.8);
+	renderResultsPanel(LayoutWidth * 0.1, LayoutWidth * 0.5, LayoutWidth * 0.8, LayoutHeight * 0.4);
 end
 
 
