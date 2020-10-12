@@ -171,6 +171,7 @@ namespace NeuroSonic.GamePlay
             m_visualPlayback = new SlidingChartPlayback(m_chart, true);
 
             m_highwayView = new HighwayView(m_locator, m_visualPlayback);
+
             //m_script = new ScriptProgram(m_locator);
 
 #if false
@@ -688,11 +689,18 @@ namespace NeuroSonic.GamePlay
         {
             switch (key.KeyCode)
             {
-                case KeyCode.UP: m_tempPitch += 0.01f; break;
-                case KeyCode.DOWN: m_tempPitch -= 0.01f; break;
-
-                case KeyCode.RIGHT: m_tempPitch += 0.1f; break;
-                case KeyCode.LEFT: m_tempPitch -= 0.1f; break;
+                case KeyCode.UP:
+                    m_highwayView.CameraParams.VerticalAnchor += 0.01f;
+                    break;
+                case KeyCode.DOWN:
+                    m_highwayView.CameraParams.VerticalAnchor -= 0.01f;
+                    break;
+                case KeyCode.RIGHT:
+                    m_highwayView.CameraParams.DepthContainer += 0.01f;
+                    break;
+                case KeyCode.LEFT:
+                    m_highwayView.CameraParams.DepthContainer -= 0.01f;
+                    break;
 
                 case KeyCode.PAGEUP:
                 {
