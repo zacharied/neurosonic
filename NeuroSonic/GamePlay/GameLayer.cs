@@ -19,9 +19,11 @@ using MoonSharp.Interpreter;
 
 using NeuroSonic.Charting;
 using NeuroSonic.GamePlay.Scoring;
+using NeuroSonic.InternetRanking;
 using NeuroSonic.Platform;
 using theori.Database;
 using theori.Configuration;
+using theori.InternetRanking;
 
 namespace NeuroSonic.GamePlay
 {
@@ -449,6 +451,7 @@ namespace NeuroSonic.GamePlay
                 if (isFinished)
                 {
                     ChartDatabaseService.AddScore(m_chartInfo, DateTime.Now, result.Score, result.Rank, ival1: result.MaxCombo, fval1: result.Gauge);
+                    InternetRankingService.Service.SubmitScore(m_chartInfo, result);
                     //Push(new ChartResultLayer(m_locator, m_chartInfo, result));
                     Push(new NscLayer(m_locator, "game/results", m_chartInfo, result));
                 }

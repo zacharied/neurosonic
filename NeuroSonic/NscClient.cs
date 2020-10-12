@@ -13,6 +13,9 @@ using theori.Configuration;
 using NeuroSonic.IO;
 using theori.Scripting;
 using System.Numerics;
+using NeuroSonic.GamePlay.Scoring;
+using NeuroSonic.InternetRanking;
+using theori.InternetRanking;
 using theori.IO;
 
 namespace NeuroSonic.Platform
@@ -31,6 +34,9 @@ namespace NeuroSonic.Platform
         [Pure] public NscClient()
         {
             ChartDatabaseService.Initialize();
+
+            InternetRankingService.Initialize();
+            InternetRankingService.Service.Adapters.Add(InternetRankingProviderKind.OrchestraFm, new OrchestraFmAdapter());
 
             m_scanner = new CustomChartTypeScanner();
 
