@@ -93,6 +93,25 @@ local function renderResultsPanel(x, y, w, h)
     theori.graphics.fillString(string.format("Miss: %d", result.missCount + result.badBtCount + result.badFxCount), x, y + h * 0.7);
 end
 
+local function renderInternetRankingPanel(x, y, w, h)
+    theori.graphics.setFillToColor(0, 0, 0, 180);
+    theori.graphics.fillRect(x, y, w, h);
+
+    theori.graphics.setFont(nil);
+    theori.graphics.setFontSize(h * 0.05);
+    theori.graphics.setTextAlign(Anchor.TopLeft);
+    theori.graphics.setFillToColor(255, 255, 255, 255);
+
+	local status = theori.internetRanking.submissionStatus();
+	local message = theori.internetRanking.errorMessage()
+
+	if (message) then
+		theori.graphics.fillString(string.format("An error occurred: %s", message), x, y)
+	else
+		theori.graphics.fillString(string.format(theori.internetRanking.submissionStatus().InProgress and "submitting" or "done!"), x, y)
+	end
+end
+
 -- Landscape Layout
 
 function Layouts.Landscape.Render(self)
@@ -115,6 +134,7 @@ function Layouts.Portrait.Render(self)
 
 	renderSongInfoPanel(LayoutWidth * 0.1, LayoutWidth * 0.1, LayoutWidth * 0.8);
 	renderResultsPanel(LayoutWidth * 0.1, LayoutWidth * 0.5, LayoutWidth * 0.8, LayoutHeight * 0.4);
+	renderInternetRankingPanel(LayoutWidth * 0.1, LayoutHeight * 0.8, LayoutWidth * 0.8, LayoutHeight * 0.2);
 end
 
 
