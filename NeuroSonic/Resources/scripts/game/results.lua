@@ -103,12 +103,12 @@ local function renderInternetRankingPanel(x, y, w, h)
     theori.graphics.setFillToColor(255, 255, 255, 255);
 
 	local status = theori.internetRanking.submissionStatus();
-	local message = theori.internetRanking.errorMessage()
+	local message = theori.internetRanking.errorMessage();
 
 	if (message) then
-		theori.graphics.fillString(string.format("An error occurred: %s", message), x, y)
+		theori.graphics.fillStringBounded(string.format("An error occurred: %s", message), x, y, w);
 	else
-		theori.graphics.fillString(string.format(theori.internetRanking.submissionStatus().InProgress and "submitting" or "done!"), x, y)
+		theori.graphics.fillStringBounded(string.format(theori.internetRanking.submissionStatus().InProgress and "submitting" or "done!"), x, y, w);
 	end
 end
 
@@ -117,8 +117,9 @@ end
 function Layouts.Landscape.Render(self)
     Layout.DrawBackgroundFilled(self.Background);
 
-	renderSongInfoPanel(LayoutHeight * 0.1, LayoutHeight * 0.1, LayoutWidth * 0.35)
+	renderSongInfoPanel(LayoutWidth * 0.1, LayoutHeight * 0.1, LayoutWidth * 0.35)
     renderResultsPanel(LayoutWidth * 0.5, LayoutHeight * 0.1, LayoutWidth * 0.4, LayoutHeight * 0.8);
+	renderInternetRankingPanel(LayoutWidth * 0.1, LayoutHeight * 0.5 , LayoutWidth * 0.35, LayoutHeight * 0.35);
 end
 
 -- Wide Landscape Layout
