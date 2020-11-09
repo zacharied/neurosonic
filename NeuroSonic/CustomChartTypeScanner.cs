@@ -91,8 +91,16 @@ namespace NeuroSonic
 
                     foreach (var chartFile in charts)
                     {
-                        using var reader = File.OpenText(chartFile.FullName);
-                        var meta = KshChartMetadata.Create(reader);
+                        KshChartMetadata meta;
+                        try
+                        {
+                            using var reader = File.OpenText(chartFile.FullName);
+                            meta = KshChartMetadata.Create(reader);
+                        }
+                        catch (Exception e)
+                        {
+                            continue;
+                        }
 
                         var chartInfo = new ChartInfo()
                         {

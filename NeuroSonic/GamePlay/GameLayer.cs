@@ -217,10 +217,17 @@ namespace NeuroSonic.GamePlay
                                 string samplePath = Path.Combine(chartsDir, setInfo.FilePath, button.Sample);
                                 if (!File.Exists(samplePath)) break;
 
-                                var sample = AudioTrack.FromFile(samplePath);
-                                m_resources.Manage(sample);
+                                try
+                                {
+                                    var sample = AudioTrack.FromFile(samplePath);
+                                    m_resources.Manage(sample);
 
-                                m_hitSounds[button.Sample] = sample;
+                                    m_hitSounds[button.Sample] = sample;
+                                }
+                                catch (Exception e)
+                                {
+                                    Logger.Log($"Failed to load sample \"{samplePath}\":\n{e.StackTrace}", LogPriority.Error);
+                                }
                             }
                         } break;
                     }
